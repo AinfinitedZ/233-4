@@ -1,0 +1,8 @@
+{
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/daniel.l/Code/git/233-3/lib/hamcrest-core-1.3.jar",
+        "/Users/daniel.l/Code/git/233-3/lib/junit-4.13.2.jar"
+    ]
+}

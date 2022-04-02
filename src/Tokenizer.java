@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 public class Tokenizer{
     private String fileName = new String();
     private static Scanner globalSc;
-    private static String[] globalLine;
     private static String tempString;
     private List<String> wordList = new ArrayList<>();
 
@@ -16,25 +15,26 @@ public class Tokenizer{
         this.fileName = name; 
         Scanner sc = new Scanner(new File(this.fileName));
         this.globalSc = sc;
-        normalize();
-        
     }
 
     protected Tokenizer(String[] line){
-        List<String> tempArrayList = Arrays.asList(globalLine);
-        wordList = tempArrayList;
-        normalize();
+        List<String> tempArrayList = Arrays.asList(line);
+        wordList.addAll(tempArrayList);
     }
 
-    private static void normalize(){
+    private static String[] normalize(){
         if(globalSc.hasNextLine()) tempString = globalSc.nextLine();
-        globalLine = tempString.split(Character.UnicodeBlock.GENERAL_PUNCTUATION.toString());
-        for(int i = 0; i < globalLine.length; i++){
-            globalLine[i].toLowerCase();
+        String[] tempLine = tempString.split(Character.UnicodeBlock.GENERAL_PUNCTUATION.toString());
+        for(int i = 0; i < tempLine.length; i++){
+            tempLine[i].toLowerCase();
         }
+        return tempLine;
     }
 
-    protected ArrayList<String> wordList(){
+    protected ArrayList<String> wordList() throws FileNotFoundException{
+        while(globalSc.hasNextLine()){
+            Tokenizer tempToken = new Tokenizer(normalize());
+        }
         return (ArrayList<String>) this.wordList;
     }
 }
