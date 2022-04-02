@@ -42,6 +42,36 @@ Finish working on the both get() method by simply return the value in the hashta
 
 Modify the reSize() method. Now it could handle the situation that too much space was occipuied. 
 
+4.2 17:22
+
+Fix Tokenizer constructor. Now the constructor should work as what the assignment shows. 
+
+4.2 17:36
+
+Finish WordStat constructor. Its related hash table should include the pair of word freqency and word itself.
+
+4.2 18:03
+
+Finish wordPairCount(). Figure out pair count by traversing wordList().
+
+4.2 18:34
+
+Fix private method reSize(). Change the way how it was coding. 
+
+Override compareTo() method in HashEntry. Now sort() method inside ArrayList could apply for HashTable. 
+
+4.2 18:52
+
+Finish wordRank() method. Implememt by using Array.sorts() method. 
+
+4.2 19:16
+
+Finish wordPairRank() method. Implement by using Array.sorts() method and compare their freqency. 
+
+4.2 19:29
+
+Finish mostCommonWords() method. Implement by traverse first k elements in the word count array. 
+
 
 
    

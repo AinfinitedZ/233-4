@@ -7,34 +7,43 @@ import java.io.FileNotFoundException;
 
 public class Tokenizer{
     private String fileName = new String();
-    private static Scanner globalSc;
-    private static String tempString;
+    private Scanner globalSc;
+    private String tempString;
+    private String[] normailizeStrings;
     private List<String> wordList = new ArrayList<>();
 
     public Tokenizer(String name) throws FileNotFoundException{
         this.fileName = name; 
         Scanner sc = new Scanner(new File(this.fileName));
-        this.globalSc = sc;
+        while(sc.hasNextLine()){
+            this.globalSc = sc;
+            normailizeStrings = this.normailize();
+            List<String> tempArrayList = Arrays.asList(normailizeStrings);
+            wordList.addAll(tempArrayList);
+        }
     }
 
     protected Tokenizer(String[] line){
-        List<String> tempArrayList = Arrays.asList(line);
+        for(int i = 0; i < line.length; i++){
+            line[i] = line[i].trim();
+            line[i].toLowerCase();
+        }
+        normailizeStrings = line;
+        List<String>tempArrayList = Arrays.asList(normailizeStrings);
         wordList.addAll(tempArrayList);
     }
 
-    private static String[] normalize(){
+    protected String[] normailize(){
         if(globalSc.hasNextLine()) tempString = globalSc.nextLine();
         String[] tempLine = tempString.split(Character.UnicodeBlock.GENERAL_PUNCTUATION.toString());
         for(int i = 0; i < tempLine.length; i++){
+            tempLine[i] = tempLine[i].trim();
             tempLine[i].toLowerCase();
         }
         return tempLine;
     }
 
     protected ArrayList<String> wordList() throws FileNotFoundException{
-        while(globalSc.hasNextLine()){
-            Tokenizer tempToken = new Tokenizer(normalize());
-        }
         return (ArrayList<String>) this.wordList;
     }
 }
