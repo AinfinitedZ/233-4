@@ -5,7 +5,9 @@ import java.util.Arrays;
 public class WordStat {
     ArrayList<String> wordList;
     HashTable wordFreqencyHashTable;
-    HashEntry[] wordRankArray;
+    HashTable wordPairFreqencyHashTable;
+    HashEntry[] wordRankEntries;
+    HashEntry[] wordPairRankEntries;
 
     public WordStat(String name) throws FileNotFoundException{
         Tokenizer fileTokenizer = new Tokenizer(name);
@@ -17,9 +19,20 @@ public class WordStat {
                 wordFreqencyHashTable.update(i, wordFreqencyHashTable.get(i) + 1);
             }
         }
+        for(int i = 0; i < wordList.size() - 1; i++){
+            String temp = wordList.get(i) + wordList.get(i + 1);
+            if(wordPairFreqencyHashTable.get(temp) == -1){
+                wordPairFreqencyHashTable.put(temp, 0);
+            } else {
+                wordPairFreqencyHashTable.update(temp, wordPairFreqencyHashTable.get(temp) + 1);
+            }
+        }
         HashEntry[] temp = wordFreqencyHashTable.hashTable;
         Arrays.sort(temp);
-        wordRankArray = temp;
+        wordRankEntries = temp;
+        HashEntry[] tempPair = wordPairFreqencyHashTable.hashTable;
+        Arrays.sort(tempPair);
+        wordPairRankEntries = tempPair;
     }
 
     public WordStat(String[] line) throws FileNotFoundException{
@@ -39,36 +52,58 @@ public class WordStat {
     }
 
     public int wordPairCount(String w1, String w2){
-        int freqencyW1W2 = 0;
-        for(int i = 0; i < wordList.size(); i++){
-            if(wordList.get(i).equals(w1) && wordList.get(i+1).equals(w2)){
-                freqencyW1W2++;
-            }
-        }
-        return freqencyW1W2;
+        return wordPairFreqencyHashTable.get(w1+w2) == -1 ? 0 : wordPairFreqencyHashTable.get(w1+w2);
     }
 
     public int wordRank(String word){
-        for(int i = 0; i < wordRankArray.length; i++){
-            if(wordRankArray[i].getKey().equals(word)) return i+1;
+        for(int i = 0; i < wordRankEntries.length; i++){
+            if(wordRankEntries[i].getKey().equals(word)) return i+1;
         }
         return 0;
     }
 
     public int wordPairRank(String w1, String w2){
-        int pairCount = this.wordPairCount(w1, w2);
-        for(int i = 0; i < wordRankArray.length; i++){
-            if(wordRankArray[i].getValue() < pairCount) return i+1;
+        String target = w1 + w2;
+        for(int i = 0; i < wordPairRankEntries.length; i++){
+            if(wordPairRankEntries[i].getKey().equals(target)) return i+1;
         }
         return 0;
     }
 
     public String[] mostCommonWords(int k){
-        String[] kCommonWords = new String[k];
+        String[] kMostCommonWords = new String[k];
         for(int i = 0; i < k; i++){
-            kCommonWords[i] = wordRankArray[i].getKey();
+            kMostCommonWords[i] = wordRankEntries[i].getKey();
         }
-        return kCommonWords;
+        return kMostCommonWords;
     }
 
+    public String[] leastCommonWords(int k){
+        String[] kLeastCommonWords = new String[k];
+        for(int i = wordRankEntries.length; i > k; i--){
+            kLeastCommonWords[i] = wordRankEntries[i].getKey();
+        }
+        return kLeastCommonWords;
+    }
+
+    public String[] mostCommonWordPairs(int k){
+        String[] kMostCommonWordPairs = new String[k];
+        for(int i = 0; i < k; i++){
+            kMostCommonWordPairs[i] = wordPairRankEntries[i].getKey();
+        }
+        return kMostCommonWordPairs;
+    }
+
+    public String[] mostCommonCollocs(int k, String baseWord, int i){
+        String[] kMostCommonCollocs = new String[k];
+        int location = wordCount(baseWord);
+        int position = 0;
+        while(k > 0 && k < wordRankEntries.length && position < k){
+            kMostCommonCollocs[position] = wordRankEntries[location].getKey();
+            location = location + i;
+            position++;
+        }  
+        return kMostCommonCollocs;
+    }
+    
 }
