@@ -105,5 +105,4 @@ public class WordStat {
         }  
         return kMostCommonCollocs;
     }
-    
 }

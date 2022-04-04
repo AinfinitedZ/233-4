@@ -35,7 +35,7 @@ public class Tokenizer{
 
     protected String[] normailize(){
         if(globalSc.hasNextLine()) tempString = globalSc.nextLine();
-        String[] tempLine = tempString.split(Character.UnicodeBlock.GENERAL_PUNCTUATION.toString());
+        String[] tempLine = tempString.split("[^A-Za-z]");
         for(int i = 0; i < tempLine.length; i++){
             tempLine[i] = tempLine[i].trim();
             tempLine[i].toLowerCase();

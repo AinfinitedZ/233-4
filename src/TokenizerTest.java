@@ -8,9 +8,9 @@ public class TokenizerTest {
 
 	@Test
 	public void testTokenizer() throws Exception {
-		Tokenizer testToken = new Tokenizer("123.rtf");
+		Tokenizer testToken = new Tokenizer("/Users/daniel.l/Code/git/233-4/233-4/src/123.txt");
 		ArrayList<String> temp = testToken.wordList();
-		assertEquals(temp, "abc");
+		// test by using debug. 
 	}
-
+	
 }

@@ -72,13 +72,17 @@ Finish wordPairRank() method. Implement by using Array.sorts() method and compar
 
 Finish mostCommonWords() method. Implement by traverse first k elements in the word count array. 
 
-4.2 08:10
+4.4 08:10
 
 Rewrite the WordStat class. Change the way how wordPair works for conventiently use. 
 
-4.2 09:16
+4.4 09:16
 
 Finish the whole WordStat class. List the rank of words acquiring them from ordered array. 
+
+4.4 14:55
+
+Finish testing the Tokenizer class by using debug. The whole wordList is seperated by regular expression [ ^ a-zA-Z] which exclude all character expect these. 
 
 
 
