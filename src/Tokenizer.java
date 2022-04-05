@@ -9,7 +9,7 @@ public class Tokenizer{
     private String fileName = new String();
     private Scanner globalSc;
     private String tempString;
-    private String[] normailizeStrings;
+    private ArrayList<String> normailizeStrings;
     private List<String> wordList = new ArrayList<>();
 
     public Tokenizer(String name) throws FileNotFoundException{
@@ -18,29 +18,30 @@ public class Tokenizer{
         while(sc.hasNextLine()){
             this.globalSc = sc;
             normailizeStrings = this.normailize();
-            List<String> tempArrayList = Arrays.asList(normailizeStrings);
-            wordList.addAll(tempArrayList);
+            wordList.addAll(normailizeStrings);
         }
     }
 
     protected Tokenizer(String[] line){
+        ArrayList<String> actualLine = new ArrayList<>();
         for(int i = 0; i < line.length; i++){
-            line[i] = line[i].trim();
-            line[i].toLowerCase();
+            if(!line[i].equals("")){
+                actualLine.add(line[i].toLowerCase());
+            }
         }
-        normailizeStrings = line;
-        List<String>tempArrayList = Arrays.asList(normailizeStrings);
-        wordList.addAll(tempArrayList);
+        wordList.addAll(actualLine);
     }
 
-    protected String[] normailize(){
+    protected ArrayList<String> normailize(){
         if(globalSc.hasNextLine()) tempString = globalSc.nextLine();
         String[] tempLine = tempString.split("[^A-Za-z]");
+        ArrayList<String> actualLine = new ArrayList<>();
         for(int i = 0; i < tempLine.length; i++){
-            tempLine[i] = tempLine[i].trim();
-            tempLine[i].toLowerCase();
+            if(!tempLine[i].equals("")){
+                actualLine.add(tempLine[i].toLowerCase());
+            }
         }
-        return tempLine;
+        return actualLine;
     }
 
     protected ArrayList<String> wordList() throws FileNotFoundException{

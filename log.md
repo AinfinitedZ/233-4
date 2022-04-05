@@ -84,9 +84,31 @@ Finish the whole WordStat class. List the rank of words acquiring them from orde
 
 Finish testing the Tokenizer class by using debug. The whole wordList is seperated by regular expression [ ^ a-zA-Z] which exclude all character expect these. 
 
+4.4 15:57 
+
+Test the collison situation. Fix the quadratic probing. Forget to iterate the second hashcode. All tests finish by debug.
+
+Fix the resize() by solving some small problems such as the typecasting and array initizialing. All tests finish by debug. 
+
+Test the update() method. 
+
+4.4 19:27
+
+Finish testing testWordCount() method. Fix some NullPointerException caused by the null in the hashtable array. Add a filter before the hashtable is sorted. 
+
+4.4 20:32
+
+finish testing wordRank() method and wordPairRank() method. 
+
+finish testing MostCommonWords() method. Fix the bug that the array was increasing sorted word freqency but the return array return decreasing sorted word freqency. 
+
+Add a pre-testing on mostCommonWords and leastCommonWords. These method should return a empty object when the input isn’t reasonable. That would avoid NullPointerException. 
+
+Finish testing mostCommonWordPair() method. 
 
 
-  
+
+
 
 
 

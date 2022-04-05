@@ -35,7 +35,7 @@ public class HashTable {
             hashTable[position] = temp;
         }
         else{
-            position = quadraticProbing(position, key);
+            position = quadraticProbing(position, key, hashCode);
             hashTable[position] = temp;
         }
         elements++;
@@ -43,17 +43,19 @@ public class HashTable {
     }
 
     private void reSize(){
-        if(elements / size > 0.7){
+        double loadFactor = (double) elements / size;
+        if(loadFactor > 0.7){
             HashEntry[] hashTableNew = new HashEntry[2*size];
             HashEntry[] temp = hashTable;
             hashTable = hashTableNew;
-            for(int i = 0; i < size; i++){
+            this.elements = 0;
+            size = size*2;
+            for(int i = 0; i < size / 2; i++){
                 if(temp[i] != null){
                     this.put(temp[i].getKey(), temp[i].getValue());
                 }
             }
             this.hashTable = hashTableNew;
-            size = size*2;
         }
     }
 
@@ -100,6 +102,18 @@ public class HashTable {
         return positionF;
     }
 
+    private int quadraticProbing(int position, String key, int hashCode){
+        int positionF = hashCode % size;
+        int secondHashCode = 1;
+        int iterations = 0;
+        while(hashTable[positionF] != null){
+            positionF = (positionF + secondHashCode * secondHashCode) % size;
+            iterations++;
+            secondHashCode++;
+            if(iterations > size) return -1;
+        }
+        return positionF;
+    }
     private int findKey(String key){
         int positionF = Math.abs(key.hashCode())%size;
         int secondHashCode = 1;
