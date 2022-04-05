@@ -102,9 +102,18 @@ public class WordStatTest {
 	@Test
 	public void testMostCommonCollocs() throws Exception {
 		WordStat demoWordStat = new WordStat("/Users/daniel.l/Code/git/233-4/233-4/src/First_Chapter_of_1984.txt");
-		String[] mostcommonCollocsBeforeSignature = demoWordStat.mostCommonCollocs(3, "signature", -1);
-		String[] mostcommonCollocsAfterSignature = demoWordStat.mostCommonCollocs(3, "signature", 1);
-		System.out.println("Hello");
+		// these words are "the", "of", "was", "and", "a", "it", "in", "to", "his", "winston".
+		String[] mostcommonCollocsBeforeSignature = demoWordStat.mostCommonCollocs(10, "thousand", -1);
+		// these words are "the", "of", "was", "a", "and", "he", "to", "it", "in", "had"
+		String[] mostcommonCollocsAfterSignature = demoWordStat.mostCommonCollocs(10, "thousand", 1);
+		assertEquals("winston", mostcommonCollocsBeforeSignature[9]);
+		assertEquals("had", mostcommonCollocsAfterSignature[9]);
+		// unreasonable input of base word. 
+		String[] unreasonableInput1 = demoWordStat.mostCommonCollocs(10, "aaaa", 1);
+		assertEquals(null, unreasonableInput1[0]);
+		// unreasonable input of i-value
+		String[] unreasonableInput2 = demoWordStat.mostCommonCollocs(10, "thousand", 5);
+		assertEquals(null, unreasonableInput2[0]);
 	}
 
 }

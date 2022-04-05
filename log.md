@@ -106,6 +106,10 @@ Add a pre-testing on mostCommonWords and leastCommonWords. These method should r
 
 Finish testing mostCommonWordPair() method. 
 
+4.4 22:14
+
+Finish and fix testing kMostCommonCollocs. Implement by create another wordStat object by a private constructor that accept List<> as input parameter. That allow one to divide the original wordList to part of the List and easily convert them into word freqency. 
+
 
 
 

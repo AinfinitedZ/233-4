@@ -1,9 +1,10 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class WordStat {
-    ArrayList<String> wordList;
+    List<String> wordList;
     HashTable wordFreqencyHashTable;
     HashTable wordPairFreqencyHashTable;
     Object[] wordRankEntries;
@@ -62,7 +63,7 @@ public class WordStat {
         }
     }
 
-    private WordStat(ArrayList<String> array) throws FileNotFoundException{
+    private WordStat(List<String> array) throws FileNotFoundException{
         this.wordList = array;
         this.wordFreqencyHashTable = new HashTable();
         for(String i : wordList){
@@ -134,11 +135,11 @@ public class WordStat {
     public String[] mostCommonCollocs(int k, String baseWord, int i) throws FileNotFoundException{
         if(Math.abs(i) != 1 || !wordList.contains(baseWord)) return new String[1];
         int firstLocation = wordList.indexOf(baseWord);
-        ArrayList<String> kArrayList = new ArrayList<>();
+        List<String> kArrayList = new ArrayList<>();
         if(i == -1){
-            kArrayList = (ArrayList<String>) wordList.subList(0, firstLocation);
+            kArrayList = wordList.subList(0, firstLocation);
         } else if (i == 1){
-            kArrayList = (ArrayList<String>) wordList.subList(firstLocation, wordList.size());
+            kArrayList = wordList.subList(firstLocation, wordList.size());
         }
         WordStat tempStat = new WordStat(kArrayList);
         return tempStat.mostCommonWords(k);

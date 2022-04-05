@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -10,7 +8,7 @@ public class Tokenizer{
     private Scanner globalSc;
     private String tempString;
     private ArrayList<String> normailizeStrings;
-    private List<String> wordList = new ArrayList<>();
+    private ArrayList<String> wordList = new ArrayList<>();
 
     public Tokenizer(String name) throws FileNotFoundException{
         this.fileName = name; 
