@@ -7,5 +7,9 @@
     ],
     "java.project.sourcePaths": [
         "src"
-    ]
+    ],
+    "editor.fontSize": 16,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures" : true,
+    "editor.fontWeight": "normal"
 }

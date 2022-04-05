@@ -19,6 +19,9 @@ public class HashEntry implements Comparable<HashEntry>{
         this.value = value;
     }
 
+    /**
+     * Override the compareTo method. Used in Arrays.sort() method. 
+     */
     @Override
     public int compareTo(HashEntry o) {
         if(o != null){

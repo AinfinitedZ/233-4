@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Tokenizer{
-    private String fileName = new String();
     private Scanner globalSc;
     private String tempString = new String("");
     private ArrayList<String> normailizeStrings;
     private ArrayList<String> wordList = new ArrayList<>();
 
     public Tokenizer(String name) throws FileNotFoundException{
-        this.fileName = name; 
-        Scanner sc = new Scanner(new File(this.fileName));
+        // Scanner used to read file by one's path name. 
+        Scanner sc = new Scanner(new File(name));
         while(sc.hasNextLine()){
             this.globalSc = sc;
             normailizeStrings = this.normailize();
@@ -22,9 +21,11 @@ public class Tokenizer{
 
     protected Tokenizer(String[] line){ 
         ArrayList<String> actualLine = new ArrayList<>();
+        // use in test constructor only. Refine the input to String. 
         for(int j = 0; j < line.length; j++){
             tempString = tempString + " " + line[j];
         }
+        // use regular expression to filtrate every character except A-Z, a-z.
         String[] spiltStrings = tempString.split("[^A-Za-z]");
         for(int i = 0; i < spiltStrings.length; i++){
             if(!spiltStrings[i].equals("")){
@@ -35,7 +36,9 @@ public class Tokenizer{
     }
 
     protected ArrayList<String> normailize(){
+        // scan the next line if existed. 
         if(globalSc.hasNextLine()) tempString = globalSc.nextLine();
+        // use regular expression to filtrate every character except A-Z, a-z.
         String[] tempLine = tempString.split("[^A-Za-z]");
         ArrayList<String> actualLine = new ArrayList<>();
         for(int i = 0; i < tempLine.length; i++){
@@ -47,6 +50,6 @@ public class Tokenizer{
     }
 
     protected ArrayList<String> wordList() throws FileNotFoundException{
-        return (ArrayList<String>) this.wordList;
+        return this.wordList;
     }
 }

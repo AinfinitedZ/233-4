@@ -10,7 +10,8 @@ public class WordStat {
     Object[] wordRankEntries;
     Object[] wordPairRankEntries;
     String name;
-
+    
+    // everything should be initializing when the constructor is invoked. 
     public WordStat(String name) throws FileNotFoundException{
         Tokenizer fileTokenizer = new Tokenizer(name);
         this.name = name;
@@ -89,7 +90,7 @@ public class WordStat {
         Arrays.sort(tempPair);
         wordPairRankEntries = tempPair;
     }
-
+    // a private constructor that able to deal with List as a input. 
     private WordStat(List<String> array) throws FileNotFoundException{
         this.wordList = array;
         this.wordFreqencyHashTable = new HashTable();
