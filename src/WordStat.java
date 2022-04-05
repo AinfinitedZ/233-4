@@ -54,6 +54,8 @@ public class WordStat {
     public WordStat(String[] line) throws FileNotFoundException{
         Tokenizer fileTokenizer = new Tokenizer(line);
         wordList = fileTokenizer.wordList();
+        this.wordFreqencyHashTable = new HashTable();
+        this.wordPairFreqencyHashTable = new HashTable();
         for(String i : wordList){
             if(wordFreqencyHashTable.get(i) == -1){
                 wordFreqencyHashTable.put(i, 0);
@@ -61,6 +63,31 @@ public class WordStat {
                 wordFreqencyHashTable.update(i, wordFreqencyHashTable.get(i) + 1);
             }
         }
+        for(int i = 0; i < wordList.size() - 1; i++){
+            String temp = wordList.get(i) + wordList.get(i + 1);
+            if(wordPairFreqencyHashTable.get(temp) == -1){
+                wordPairFreqencyHashTable.put(temp, 0);
+            } else {
+                wordPairFreqencyHashTable.update(temp, wordPairFreqencyHashTable.get(temp) + 1);
+            }
+        }
+        // Add a filter before actually sort the whole array. 
+        ArrayList<HashEntry> temp = new ArrayList<>();
+        for(int i = 0; i < wordFreqencyHashTable.hashTable.length; i++){
+            if(wordFreqencyHashTable.hashTable[i] != null) temp.add(wordFreqencyHashTable.hashTable[i]);
+        }
+        Object[] tempArray = temp.toArray();
+        Arrays.sort(tempArray);
+        wordRankEntries = tempArray;
+
+        temp.clear();
+
+        for(int i = 0; i < wordPairFreqencyHashTable.hashTable.length; i++){
+            if(wordPairFreqencyHashTable.hashTable[i] != null) temp.add(wordPairFreqencyHashTable.hashTable[i]);
+        }
+        Object[] tempPair = temp.toArray();
+        Arrays.sort(tempPair);
+        wordPairRankEntries = tempPair;
     }
 
     private WordStat(List<String> array) throws FileNotFoundException{

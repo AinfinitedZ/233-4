@@ -110,7 +110,13 @@ Finish testing mostCommonWordPair() method.
 
 Finish and fix testing kMostCommonCollocs. Implement by create another wordStat object by a private constructor that accept List<> as input parameter. That allow one to divide the original wordList to part of the List and easily convert them into word freqency. 
 
+4.5 10:11
 
+finish test of tokenizer for constructor(String[] line). 
+
+4.5 10:43
+
+Finish test of word stat test. Instead of direct use sample text, I rewrite the constructor to build the test unit. 
 
 
 

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 public class Tokenizer{
     private String fileName = new String();
     private Scanner globalSc;
-    private String tempString;
+    private String tempString = new String("");
     private ArrayList<String> normailizeStrings;
     private ArrayList<String> wordList = new ArrayList<>();
 
@@ -20,11 +20,15 @@ public class Tokenizer{
         }
     }
 
-    protected Tokenizer(String[] line){
+    protected Tokenizer(String[] line){ 
         ArrayList<String> actualLine = new ArrayList<>();
-        for(int i = 0; i < line.length; i++){
-            if(!line[i].equals("")){
-                actualLine.add(line[i].toLowerCase());
+        for(int j = 0; j < line.length; j++){
+            tempString = tempString + " " + line[j];
+        }
+        String[] spiltStrings = tempString.split("[^A-Za-z]");
+        for(int i = 0; i < spiltStrings.length; i++){
+            if(!spiltStrings[i].equals("")){
+                actualLine.add(spiltStrings[i].toLowerCase());
             }
         }
         wordList.addAll(actualLine);
