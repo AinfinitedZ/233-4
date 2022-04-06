@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -9,9 +10,8 @@ public class HashTableTest {
 		HashTable demoHashTable = new HashTable();
 		// test for collison. Using quadratic probing. 
 		demoHashTable.put("a", 0, 1);
-		demoHashTable.put("b", 0, 2);
+		demoHashTable.put("b", 1, 2);
 		demoHashTable.put("c", 0, 1);
-		System.out.println("hello world");
 		HashTable demoHashTable2 = new HashTable();
 		// test for resize. Since our load factor is 0.7, the 71st put would cause resize. 
 		for(int i = 0; i < 70; i++){
@@ -25,5 +25,24 @@ public class HashTableTest {
 		assertEquals(1, demoHashTable3.get("a"));
 		// meaningless command line for debug.
 		System.out.println("Hello world");
+	}
+
+	@Test
+	public void testGet(){
+		HashTable demoHashTable = new HashTable();
+		demoHashTable.put("a", 0);
+		demoHashTable.put("b", 1);
+		assertEquals(0, demoHashTable.get("a"));
+		assertEquals(1, demoHashTable.get("b"));
+		assertEquals(-1, demoHashTable.get("c"));
+	}
+
+	@Test
+	public void testUpdate(){
+		HashTable demoHashTable = new HashTable();
+		demoHashTable.put("a", 0);
+		assertEquals(0, demoHashTable.get("a"));
+		demoHashTable.update("a", 3);
+		assertEquals(3, demoHashTable.get("a"));
 	}
 }

@@ -25,7 +25,12 @@ public class HashEntry implements Comparable<HashEntry>{
     @Override
     public int compareTo(HashEntry o) {
         if(o != null){
-            return Integer.compare(this.value, o.value);
+            // if(this.value < o.value){
+            //     return -Integer.compare(this.value, o.value);
+            // } else {
+            //     return -this.key.compareTo(o.key);
+            // }
+            return (this.value*999 - o.value*999 + this.key.compareTo(o.key));
         }
         return -1;
     }

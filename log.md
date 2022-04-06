@@ -118,8 +118,15 @@ finish test of tokenizer for constructor(String[] line).
 
 Finish test of word stat test. Instead of direct use sample text, I rewrite the constructor to build the test unit. 
 
+4.5 15:09
+
+Deal with the edge situations that return String arrays. one with same count is returned by alphabetical order. 
+
+Deal with the edge situations that input value is too large. One would return whole array if k is too large. 
 
 
+4.5 23:54
+Finish extra credit that edge cases of method that return String[] Have no time to write more log xD
 
 
 
